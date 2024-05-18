@@ -15,7 +15,6 @@ let TreeNode = /** @class */ (function () {
 
 
 let FONT_SIZE = 20;
-//////my code
 
 
 function getHerbrandBasis(S) {
@@ -36,6 +35,10 @@ function getHerbrandBasis(S) {
 }
 
 const S = ["P", "Q or P", "~P or ~Q", "~P or ~R"];
+// const S = [ "Q or P", "~P or ~Q", "~P or ~R", "P or ~T"];
+// const S = ["P", "Q or F"];
+
+
 
 function buildTree() {
     let H_basis = getHerbrandBasis(S);
@@ -50,7 +53,10 @@ function buildTree() {
 }
 
 function buildTreeHelper(H_basis, parent, root, S) {
-    if (H_basis.length === 0 || root.refutes) return;
+    if (H_basis.length === 0 || root.refutes) {
+        console.log(root.data + " refutes the tree");
+        return;
+    }
 
     const string = H_basis[0];
     const node = new TreeNode(string, null, null, root);
@@ -67,6 +73,7 @@ function buildTreeHelper(H_basis, parent, root, S) {
     for (const disjunct of S) {
         if (!satisfiesDisjunct(variableValues, disjunct)) {
             node.refutes = true;
+            // console.log(node.data + " refutes tree on " + disjunct);
             break;
         }
     }
@@ -157,10 +164,11 @@ function drawLineRightChild(ctx, _x, y, quadrantWidth, levelHeight) {
 function drawNode(canvas, ctx, node, xDepth, yDepth, treeHeight) {
     let _a = canvas.getBoundingClientRect(), width = _a.width -100, height = _a.height;
     let quadrantWidth = width / Math.pow(2, yDepth);
-    let levelHeight = height / (treeHeight - 1);
+    let levelHeight= height / (treeHeight - 1);
     let quadrantHeight = yDepth * levelHeight;
+
     let x = quadrantWidth * xDepth + quadrantWidth / 2;
-    let y = quadrantHeight / 2+ FONT_SIZE;
+    let y = quadrantHeight / 2 ;
     writeNode(ctx, node, x, y);
 
     if (node.left) {
