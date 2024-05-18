@@ -1,0 +1,19 @@
+{
+  "name": "tree-rendering",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc tree.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "typescript": "^4.3.5"
+  },
+  "devDependencies": {
+    "eslint": "^7.30.0",
+    "prettier": "^2.3.2"
+  }
+}
